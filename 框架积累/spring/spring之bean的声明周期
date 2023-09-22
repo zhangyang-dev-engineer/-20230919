@@ -1,0 +1,19 @@
+1，启动ApplicationContext
+2,创建BeanFactory
+3,初始化BeanFactory
+4，执行BeanFactory 后置处理器 
+5，进行扫描
+6，生成BeanDefinition
+7,合并BeanDefinition
+8,加载类
+9，实例化前
+10，推断构造方法
+11，实例化
+12，BeanDefinition后置处理
+13，实例化后
+14，填充属性
+15，填充属性后
+16，执行Aware
+17,初始化前
+18，初始化
+19，初始化后
