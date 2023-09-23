@@ -1,1 +1,21 @@
 
+官网：https://nacos.io/zh-cn/docs/quick-start.html
+nacos注册中心核心功能
+服务注册
+   nacos client会通过发送rest请求方式，向nacos server注册自己的服务，提供自身的元数据，比如ip地址，端口等信息，nacos server接口收到注册请求后，就会把这些元数据信息存储在一个双层的map中
+
+
+
+服务心跳
+  服务注册后，nacos client会维护一个定时心跳持续通知Nacos server，说明服务一直处于可用状态，防止被剔除，默认5s，发送一次心跳
+
+服务同步
+  nacos server 集群之间会互相同步服务实例，保证服务信息的一致性
+
+服务发现
+  服务消费者在调用服务提供者服务的同时，会发送一个rest请求给nacos server，获取上面的注册的服务清单，并且缓存在nacos client本地，同时会在nacos client本地开启一个定时任务定时拉取服务端最新的注册表信息更新到本地缓存
+
+
+
+服务健康检查
+   nacos server会开启一个定时任务来检查注册服务实例的健康情况，对于超过15s没有收到客户端心跳的实例会将他的healthy属性设置为false，如果蘑菇额实例超过30s没有收到心跳，直接剔除该实例
