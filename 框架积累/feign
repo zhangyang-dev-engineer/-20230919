@@ -1,1 +1,40 @@
+1， Target(动态代理机制)  基于面向接口的动态代理方式生成实现类,
+2，Contract 根据接口类的注解声明规则，解析出底层MethodHandle
+3, MethodHandle 基于RequestBean动态生成reqeust
+4,decoder resouponse   encoder request     Encoder将Bean包装成请求
+5，interceptors 拦截器负责对请求和返回进行装饰处理
+6，Logger 日志记录
+7，client 基于重试器发送http请求，可基于不同的http框架处理
 
+
+
+feign的扩展
+
+//打印feign日志
+@Configuration
+public class OauthApiFeignConfiguration  {
+
+    /**
+     * feign日志级别
+     *
+     * @return
+     */
+    @Bean
+    Logger.Level feignLoggerLevel() {
+        return Logger.Level.BASIC;
+    }
+
+}
+//feign拦截器配置，往下游传参
+@Configuration
+public class FeignInterceptor implements RequestInterceptor {
+    @Override
+    public void apply(RequestTemplate requestTemplate) {
+        requestTemplate.header("traceID", MDC.get("traceID"));
+    }
+}
+
+@Bean
+public FeignAuthReqeustInterceptor feignAuthRequestInterceptor(){
+return new FeignAuthRequestinterceptor()
+}
