@@ -38,3 +38,12 @@ public class FeignInterceptor implements RequestInterceptor {
 public FeignAuthReqeustInterceptor feignAuthRequestInterceptor(){
 return new FeignAuthRequestinterceptor()
 }
+
+//feign的超时时间 第一个参数，连接超时时间ms，默认2s,第二个请求处理的超时时间ms 默认值5s
+
+public class FeignConfig{
+@Bean
+public Request.Options options(){
+return new Request.Options(500,10000)
+}
+}
